@@ -183,9 +183,8 @@ export default function SpeTutorial() {
               position: 'relative', 
               height: '80px', 
               display: 'flex',
-              mixBlendMode: 'multiply', /* Faz o fundo branco original desaparecer */
-              isolation: 'isolate',     /* Garante que o efeito só afete a logo */
-              backgroundColor: '#FFFFFF' /* Força o fundo branco para corrigir PNGs transparentes */
+              mixBlendMode: 'multiply', /* Faz o fundo branco original da imagem desaparecer */
+              isolation: 'isolate'     /* Garante que o efeito só afete a logo */
             }}>
               <img 
                 src="/spe-ufpa-logo.png"
