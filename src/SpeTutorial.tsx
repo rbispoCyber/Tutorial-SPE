@@ -162,13 +162,18 @@ export default function SpeTutorial() {
         }
       `}</style>
 
-      {/* ── Top Floating Logo ── */}
+      {/* ── Fixed Top Navbar with SPE Logo ── */}
       <nav style={{
         animation: 'fadeNav 1.2s ease-out 0.8s both',
-        position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10,
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10,
         display: 'flex', alignItems: 'center',
-        padding: '16px 28px',
-        background: 'transparent',
+        padding: '0 28px',
+        height: '96px',
+        background: 'rgba(255,255,255,0.70)',
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
+        borderBottom: '1px solid rgba(0, 61, 165,0.10)',
+        boxShadow: '0 1px 12px rgba(0, 42, 122,0.07)',
       }}>
         {/* SPE Logo — official mark */}
         <a href="https://www.spe.org" target="_blank" rel="noopener noreferrer"
@@ -237,14 +242,15 @@ export default function SpeTutorial() {
           <h1 style={{
             fontSize: 'clamp(1.9rem, 5vw, 3rem)',
             fontWeight: 700, letterSpacing: '-0.03em',
-            color: '#002A7A', lineHeight: 1.12,
+            color: '#FFFFFF', lineHeight: 1.12,
             marginBottom: '16px',
+            textShadow: '0 4px 24px rgba(0,0,0,0.4)', // Soft shadow to lift it off the background
           }}>
             Como se tornar{' '}
             <span style={{
               fontFamily: "'EB Garamond', Georgia, serif",
               fontStyle: 'italic', fontWeight: 500,
-              color: '#003DA5',
+              color: '#82C3FF', /* Icy bright blue for high contrast */
             }}>
               membro da SPE
             </span>

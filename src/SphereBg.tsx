@@ -200,10 +200,10 @@ export default function SphereBg() {
       const hx = cx + nx * R * 0.20;
       const hy = cy + ny * R * 0.20;
       const body = ctx.createRadialGradient(hx, hy, 0, cx, cy, R);
-      body.addColorStop(0,    'rgba(177, 212, 250, 0.85)');
-      body.addColorStop(0.35, 'rgba(102, 168, 230, 0.75)');
-      body.addColorStop(0.70, 'rgba(25, 115, 200, 0.60)');
-      body.addColorStop(1,    'rgba(0, 61, 165, 0.50)');
+      body.addColorStop(0,    'rgba(60, 140, 220, 0.85)');   // Central highlight
+      body.addColorStop(0.30, 'rgba(0, 61, 165, 0.90)');     // Official SPE blue covers the upper center
+      body.addColorStop(0.65, 'rgba(0, 25, 75, 0.95)');      // Deep navy for the volume
+      body.addColorStop(1,    'rgba(0, 10, 35, 0.98)');      // Almost black midnight blue at the rim
       ctx.save();
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
@@ -218,78 +218,73 @@ export default function SphereBg() {
       ctx.clip();
       const inner = ctx.createRadialGradient(cx, cy, R * 0.40, cx, cy, R);
       inner.addColorStop(0, 'rgba(0,0,0,0)');
-      inner.addColorStop(0.7, 'rgba(0, 61, 165, 0.15)'); // Subtle inner volume glow
-      inner.addColorStop(1, 'rgba(0, 20, 80, 0.45)');    // Deep shadow on edge
+      inner.addColorStop(0.7, 'rgba(0, 25, 75, 0.35)'); // Deeper inner shadow
+      inner.addColorStop(1, 'rgba(0, 5, 20, 0.70)');    // Very dark shadow directly on edge to make the rim light pop
       ctx.fillStyle = inner;
       ctx.fillRect(0, 0, W, H);
       ctx.restore();
 
-      /* ── 4. Rim light: crescent arc along sphere curvature ─────────────
-         The light is painted ON and JUST OUTSIDE the sphere edge as a
-         series of concentric arc strokes with decreasing width and
-         increasing brightness toward the centre — exactly like lazy.so.
-         The arc is centred on `angle` (toward cursor) and spans ~±70°.  */
+      /* ── 4. Rim light: crescent arc along sphere curvature ───────────── */
+      const rimI   = 1.0;                     // Always full intensity — no falloff
+      const arcCtr = angle;                   
+      const HALF   = Math.PI * 0.35;          // Arc span ~±63° — wider glow
 
-      const rimI   = 0.40 + 0.60 * dist;      // intensity vs cursor distance
-      const arcCtr = angle;                    // arc centred at cursor-facing point
-      const HALF   = Math.PI * 0.38;          // ±68°  total arc span
-
-      // Layer 1 — widest, faintest (atmospheric bleed outside sphere)
+      // Layer 1 — wide diffuse glow (Pure White)
       ctx.save();
       ctx.beginPath();
-      ctx.arc(cx, cy, R + 12, arcCtr - HALF, arcCtr + HALF);
-      ctx.strokeStyle = `rgba(160,210,255,${0.10 * rimI})`;
-      ctx.lineWidth   = 40;
+      ctx.arc(cx, cy, R + 6, arcCtr - HALF, arcCtr + HALF);
+      ctx.strokeStyle = `rgba(255, 255, 255, 0.20)`;
+      ctx.lineWidth   = 32;
       ctx.lineCap     = 'round';
       ctx.stroke();
       ctx.restore();
 
-      // Layer 2 — still outside, tighter
+      // Layer 2 — tighter inner glow
       ctx.save();
       ctx.beginPath();
-      ctx.arc(cx, cy, R + 5, arcCtr - HALF * 0.80, arcCtr + HALF * 0.80);
-      ctx.strokeStyle = `rgba(200,228,255,${0.16 * rimI})`;
-      ctx.lineWidth   = 22;
-      ctx.lineCap     = 'round';
-      ctx.stroke();
-      ctx.restore();
-
-      // Layer 3 — right ON the border, soft white glimmer
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(cx, cy, R, arcCtr - HALF * 0.65, arcCtr + HALF * 0.65);
-      ctx.strokeStyle = `rgba(235,246,255,${0.30 * rimI})`;
+      ctx.arc(cx, cy, R + 2, arcCtr - HALF * 0.80, arcCtr + HALF * 0.80);
+      ctx.strokeStyle = `rgba(255, 255, 255, 0.40)`;
       ctx.lineWidth   = 18;
       ctx.lineCap     = 'round';
       ctx.stroke();
       ctx.restore();
 
-      // Layer 4 — tighter bright band
+      // Layer 3 — bright solid rim
       ctx.save();
       ctx.beginPath();
-      ctx.arc(cx, cy, R, arcCtr - HALF * 0.42, arcCtr + HALF * 0.42);
-      ctx.strokeStyle = `rgba(255,255,255,${0.48 * rimI})`;
+      ctx.arc(cx, cy, R, arcCtr - HALF * 0.60, arcCtr + HALF * 0.60);
+      ctx.strokeStyle = `rgba(255, 255, 255, 0.70)`;
       ctx.lineWidth   = 8;
       ctx.lineCap     = 'round';
       ctx.stroke();
       ctx.restore();
 
-      // Layer 5 — narrow bright core arc (the "edge highlight")
+      // Layer 4 — intense hot band
       ctx.save();
       ctx.beginPath();
-      ctx.arc(cx, cy, R, arcCtr - HALF * 0.22, arcCtr + HALF * 0.22);
-      ctx.strokeStyle = `rgba(255,255,255,${0.72 * rimI})`;
-      ctx.lineWidth   = 3;
+      ctx.arc(cx, cy, R, arcCtr - HALF * 0.35, arcCtr + HALF * 0.35);
+      ctx.strokeStyle = `rgba(255, 255, 255, 0.90)`;
+      ctx.lineWidth   = 4;
       ctx.lineCap     = 'round';
       ctx.stroke();
       ctx.restore();
 
-      // Layer 6 — hairline: the sharpest brightest sliver at the exact tip
+      // Layer 5 — razor-sharp white core
       ctx.save();
       ctx.beginPath();
-      ctx.arc(cx, cy, R, arcCtr - HALF * 0.08, arcCtr + HALF * 0.08);
-      ctx.strokeStyle = `rgba(255,255,255,${0.92 * rimI})`;
-      ctx.lineWidth   = 1.2;
+      ctx.arc(cx, cy, R, arcCtr - HALF * 0.15, arcCtr + HALF * 0.15);
+      ctx.strokeStyle = `rgba(255, 255, 255, 1.0)`;
+      ctx.lineWidth   = 1.5;
+      ctx.lineCap     = 'round';
+      ctx.stroke();
+      ctx.restore();
+
+      // Layer 6 — burning specular tip
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, arcCtr - HALF * 0.05, arcCtr + HALF * 0.05);
+      ctx.strokeStyle = `rgba(255, 255, 255, 1.0)`;
+      ctx.lineWidth   = 0.5;
       ctx.lineCap     = 'round';
       ctx.stroke();
       ctx.restore();
