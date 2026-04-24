@@ -66,13 +66,12 @@ export default function SphereBg() {
       scrollSmooth += (scrollY  - scrollSmooth) * 0.08;
 
       /* ── Sphere geometry ──
-         Sphere is FIXED on screen (position: fixed canvas) but its
-         vertical centre shifts ~30% of scroll so it appears to "float"
-         behind the content as you scroll.                                */
-      const cx   = W / 2;
-      const cyBase = H * 0.40;                          // resting centre
-      const cyOffset = scrollSmooth * 0.28;             // parallax factor
-      const cy   = cyBase + cyOffset;
+         Sphere centre follows scroll with a gentle parallax.
+         Resting position at 40% of viewport height (aligned with title). */
+      const cx     = W / 2;
+      const cyBase = H * 0.40;
+      const cyOffset = scrollSmooth * 0.28;
+      const cy     = cyBase + cyOffset;
 
       /* Radius: slightly LARGER than the accordion card (≈ 680px wide)
          We target ~55% of the viewport shorter dimension.               */
@@ -88,7 +87,7 @@ export default function SphereBg() {
       const nx    = dx / len;
       const ny    = dy / len;
       const angle = Math.atan2(dy, dx);
-      const dist  = Math.min(len / (Math.max(W, H) * 0.50), 1);
+
 
       ctx.globalAlpha = fadeIn;
 
@@ -102,7 +101,6 @@ export default function SphereBg() {
 
       /* ── 1.5 Interconnected Lozenges (Constellation) ── */
       const connectDist = 140;
-      const mouseDist = 200;
       // Aparece do vazio em 1.0s apenas após a página começar
       const particleFade = Math.max(0, Math.min((elapsed - 1.0) / 1.0, 1));
 
@@ -128,16 +126,6 @@ export default function SphereBg() {
           p.vy += (dyS / distS) * force;
         }
 
-        // Interação 2: Cursor do mouse
-        const dxM = p.x - smooth.x;
-        const dyM = p.y - smooth.y;
-        const distM = Math.sqrt(dxM * dxM + dyM * dyM) || 1;
-        if (distM < mouseDist) {
-          // Atração sutil criando um campo interativo
-          const force = (mouseDist - distM) * 0.0003;
-          p.vx -= (dxM / distM) * force; 
-          p.vy -= (dyM / distM) * force;
-        }
 
         // Atrito e limite de velocidade para uma animação fluida
         p.vx *= 0.98;
@@ -171,15 +159,7 @@ export default function SphereBg() {
             }
           }
           
-          // Linhas interativas conectando a partícula ao mouse
-          if (distM < mouseDist) {
-             ctx.beginPath();
-             ctx.moveTo(p.x, p.y);
-             ctx.lineTo(smooth.x, smooth.y);
-             ctx.strokeStyle = `rgba(0, 42, 122, ${0.32 * (1 - distM / mouseDist)})`;
-             ctx.lineWidth = 1;
-             ctx.stroke();
-          }
+
 
           // Renderizar a partícula no formato de lozango
           ctx.save();

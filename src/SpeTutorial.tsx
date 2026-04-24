@@ -121,6 +121,7 @@ export default function SpeTutorial() {
   const [activeStep, setActiveStep] = useState<number | null>(1);
   const toggle = (id: number) => setActiveStep(p => p === id ? null : id);
 
+
   return (
     <>
       <SphereBg />
@@ -176,30 +177,11 @@ export default function SpeTutorial() {
         boxShadow: '0 1px 12px rgba(0, 42, 122,0.07)',
       }}>
         {/* SPE Logo — official mark */}
-        <a href="https://www.spe.org" target="_blank" rel="noopener noreferrer"
-          style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            
-            <div style={{ 
-              position: 'relative', 
-              height: '80px', 
-              display: 'flex',
-              mixBlendMode: 'multiply', /* Faz o fundo branco original da imagem desaparecer */
-              isolation: 'isolate'     /* Garante que o efeito só afete a logo */
-            }}>
-              <img 
-                src="/spe-ufpa-logo.png"
-                alt="SPE UFPA Student Chapter Logo"
-                style={{ height: '80px', objectFit: 'contain' }}
-              />
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                backgroundColor: '#002A7A', /* Azul Escuro SPE */
-                mixBlendMode: 'screen',     /* Pinta o texto preto de azul */
-                pointerEvents: 'none'
-              }} />
-            </div>
-            
+            <img 
+              src="/spe-ufpa-logo.png"
+              alt="SPE UFPA Student Chapter Logo"
+              style={{ height: '80px', objectFit: 'contain' }}
+            />
           </a>
       </nav>
 
@@ -298,7 +280,7 @@ export default function SpeTutorial() {
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
                     {/* Left side with animated custom icon */}
                     <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '18px' }}>
-                      {/* Icon container with Moviemotion */}
+                      {/* Icon container */}
                       <div style={{
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         width: '52px', height: '52px', borderRadius: '15px', flexShrink: 0,
@@ -404,7 +386,7 @@ export default function SpeTutorial() {
                </svg>
                Acessar Instagram
              </a>
-             <a href="mailto:spe@ufpa.br"
+             <a href="mailto:ufpaspe@gmail.com"
                 className="action-link"
                 style={{ background: 'rgba(255, 255, 255, 0.8)', color: '#003DA5', border: '1.5px solid rgba(0, 61, 165, 0.25)', boxShadow: '0 4px 15px rgba(0, 61, 165, 0.05)' }}>
                <svg style={{ transform: 'translateY(1px)' }} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
