@@ -177,12 +177,14 @@ export default function SpeTutorial() {
         boxShadow: '0 1px 12px rgba(0, 42, 122,0.07)',
       }}>
         {/* SPE Logo — official mark */}
-            <img 
-              src="/spe-ufpa-logo.png"
-              alt="SPE UFPA Student Chapter Logo"
-              style={{ height: '80px', objectFit: 'contain' }}
-            />
-          </a>
+        <a href="https://www.spe.org" target="_blank" rel="noopener noreferrer"
+          style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <img
+            src="/spe-ufpa-logo.png"
+            alt="SPE UFPA Student Chapter Logo"
+            style={{ height: '80px', objectFit: 'contain' }}
+          />
+        </a>
       </nav>
 
       {/* ── Page wrapper ── */}
