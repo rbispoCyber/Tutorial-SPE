@@ -19,7 +19,8 @@ export default function SphereBg() {
 
     /* ── Particles (Lozenges Constellation) ── */
     interface Particle { x: number; y: number; vx: number; vy: number; size: number; }
-    const numParticles = 60;
+    const isMobile = window.innerWidth < 768;
+    const numParticles = isMobile ? 30 : 60;
     const particles: Particle[] = [];
     // Espalha pelas bordas aleatoriamente
     for (let i = 0; i < numParticles; i++) {
