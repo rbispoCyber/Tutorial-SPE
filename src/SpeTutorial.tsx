@@ -239,6 +239,25 @@ export default function SpeTutorial() {
               membro da SPE
             </span>
           </h1>
+          
+          {/* Decorative Divider */}
+          <div style={{
+            height: '1px',
+            width: '140px',
+            margin: '28px auto',
+            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.8) 50%, transparent 100%)',
+            position: 'relative'
+          }}>
+            <div style={{
+               position: 'absolute',
+               top: '50%', left: '50%',
+               transform: 'translate(-50%, -50%)',
+               width: '3px', height: '3px',
+               borderRadius: '50%',
+               background: '#fff',
+               boxShadow: '0 0 10px #fff, 0 0 20px #fff'
+            }} />
+          </div>
 
           {/* Subtitle */}
           <p style={{
