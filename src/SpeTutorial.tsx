@@ -169,7 +169,7 @@ export default function SpeTutorial() {
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10,
         display: 'flex', alignItems: 'center',
         padding: '0 28px',
-        height: '96px',
+        height: '64px',
         background: 'rgba(255,255,255,0.70)',
         backdropFilter: 'blur(14px)',
         WebkitBackdropFilter: 'blur(14px)',
@@ -182,7 +182,7 @@ export default function SpeTutorial() {
           <img
             src="/spe-ufpa-logo.png"
             alt="SPE UFPA Student Chapter Logo"
-            style={{ height: '80px', objectFit: 'contain' }}
+            style={{ height: '48px', objectFit: 'contain' }}
           />
         </a>
       </nav>
@@ -192,7 +192,7 @@ export default function SpeTutorial() {
         position: 'relative', zIndex: 2,
         width: '100%', minHeight: '100vh',
         display: 'flex', flexDirection: 'column', alignItems: 'center',
-        padding: '136px 24px 100px',   /* top: 136px to clear the 96px navbar */
+        padding: '100px 24px 100px',   /* top: 100px to clear the 64px navbar */
         fontFamily: "'Inter', system-ui, sans-serif",
       }}>
 

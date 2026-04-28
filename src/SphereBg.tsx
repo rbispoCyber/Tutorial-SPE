@@ -180,7 +180,7 @@ export default function SphereBg() {
       const hx = cx + nx * R * 0.20;
       const hy = cy + ny * R * 0.20;
       const body = ctx.createRadialGradient(hx, hy, 0, cx, cy, R);
-      body.addColorStop(0,    'rgba(60, 140, 220, 0.85)');   // Central highlight
+      body.addColorStop(0,    'rgba(0, 45, 125, 0.90)');     // Darker central start (removed bright highlight)
       body.addColorStop(0.30, 'rgba(0, 61, 165, 0.90)');     // Official SPE blue covers the upper center
       body.addColorStop(0.65, 'rgba(0, 25, 75, 0.95)');      // Deep navy for the volume
       body.addColorStop(1,    'rgba(0, 10, 35, 0.98)');      // Almost black midnight blue at the rim
@@ -269,18 +269,7 @@ export default function SphereBg() {
       ctx.stroke();
       ctx.restore();
 
-      /* ── 4.5 Core Specular dot (Primary reflection facing cursor) ── */
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx.clip();
-      const coreHole = ctx.createRadialGradient(hx, hy, 0, hx, hy, R * 0.35);
-      coreHole.addColorStop(0,   `rgba(255,255,255,${0.50 * rimI})`);
-      coreHole.addColorStop(0.15,`rgba(200,230,255,${0.15 * rimI})`);
-      coreHole.addColorStop(1,   'rgba(0,0,0,0)');
-      ctx.fillStyle = coreHole;
-      ctx.fillRect(0, 0, W, H);
-      ctx.restore();
+      /* Removed Core Specular dot per user request */
 
       /* ── 5. Bounce light (opposite side, subtle cyan fill for 3D realism) ── */
       ctx.save();
